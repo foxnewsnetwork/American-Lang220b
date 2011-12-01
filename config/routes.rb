@@ -5,19 +5,11 @@ Nakedads::Application.routes.draw do
 
   get "pages/stats"
 
-  get "ad/new"
+	resource :ads , :except => [ :update, :edit, :destroy, :create ]
 
-  get "ad/create"
-
-  get "ad/show"
-
-  get "ad/index"
-
-  get "ad/destroy"
-
-  get "ad/edit"
-
-  get "ad/update"
+	scope "namespace" do
+		resource :ads
+	end
 
   devise_for :users
 
