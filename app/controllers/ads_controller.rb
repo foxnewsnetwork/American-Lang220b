@@ -1,4 +1,4 @@
-class AdController < ApplicationController
+class AdsController < ApplicationController
 
 	# Get request from a corporation
   def new
@@ -6,8 +6,9 @@ class AdController < ApplicationController
   		flash[:error] = "Only actual corporations can make ads. Consider becoming a large corporation"
   		redirect_to "/"
   		return
-  	end
+    end
     @ad = Ad.new(:corporation)
+
   end
 
   # Post from corporation account
@@ -50,6 +51,7 @@ class AdController < ApplicationController
 
 	# Get request from anyone
   def index
+    @ads = Ad.find(:all)
   end
 
 	# Delete request from a corporation

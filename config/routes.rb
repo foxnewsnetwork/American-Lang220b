@@ -5,15 +5,27 @@ Nakedads::Application.routes.draw do
 
   get "pages/stats"
 
-	resource :ads , :except => [ :update, :edit, :destroy, :create ]
 
-	scope "namespace" do
-		resource :ads
+  scope "corporation" do
+		resources :ads do
+      member do
+      get 'crop'
+     end
+
+   end
 	end
+	# Normalfags can only view the ads
+
+  resources :ads do
+    member do
+      get 'crop'
+    end
+  end
 
   devise_for :users
-
-  devise_for :corporations
+  devise_for :corporations do
+    get '/corporations/sign_out' => 'devise/sessions#destroy'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
