@@ -1,7 +1,9 @@
 <%= form_for @ad, :html => { :multipart => true } do |f| %>
     <%= render 'shared/error_messages', :object => f.object %>
-
+    <%= f.label :content %> <br>
+    <%= f.text_field :content %>
       <div class = "field">
+        <%= f.label "Upload Photo" %><br>
         <%= f.file_field :photo %>
       </div>
     <p> <%= f.submit "Submit" %></p>

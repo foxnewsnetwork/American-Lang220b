@@ -11,13 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111129214220) do
+ActiveRecord::Schema.define(:version => 20111224002806) do
 
   create_table "ads", :force => true do |t|
     t.text     "content"
     t.integer  "corporation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "ads", ["corporation_id"], :name => "index_ads_on_corporation_id"

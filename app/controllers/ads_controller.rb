@@ -38,6 +38,8 @@ class AdsController < ApplicationController
   	end
 
   	# Step 4: Handle successful saving by redirection
+    @adstat = Adstat.new(:ad_id => @ad.id, :views => 0)
+    @adstat.save
   	flash[:success] = "Successfully created a new ad"
     redirect_to crop_ad_path(@ad)
   end
@@ -45,8 +47,10 @@ class AdsController < ApplicationController
 
   # Get from anyone
   def show
-  	# IMPLEMENT ME, YOU FAGGOT!
     @ad = Ad.find(params[:id])
+    @adstat = Adstat.find_by_ad_id(params[:id])
+    @adstat.views += 1
+    @adstat.save
   end
 
 	# Get request from anyone
@@ -71,10 +75,24 @@ class AdsController < ApplicationController
 
 	# Put request from corporation
   def update
+   @ad = Ad.find(params[:id])
+  @corporation = Corporation.find(@ad.corporation_id)
+  if @ad.update_attributes(params[:ad])
+    if params[:commit] == "Crop"
+      flash[:notice] = "Successfully updated Ad."
+      redirect_to @ad
+    else
+      render :action => "crop"
+    end
+  else
+    render :action => 'crop'
+  end
+
   end
   
   def crop
-  
+    @ad = Ad.find(params[:id])
+
   end
   
   def interact

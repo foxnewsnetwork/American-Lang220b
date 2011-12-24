@@ -1,2 +1,3 @@
-<h1>Ads#index</h1>
-<p>Find me in app/views/ads/index.html.erb</p>
+<%  @ads.each do |ad| %>
+<%= link_to ad.content, ad %><br>
+<% end %>
